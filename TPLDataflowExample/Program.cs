@@ -40,7 +40,7 @@ static class Program
     // Removes short words and duplicates.
     var filterWordList = new TransformBlock<string[], string[]>(words =>
     {
-      Console.WriteLine("Filtering word list...");
+      Console.WriteLine("Filtering word list ( > 3 chars and ignore duplicates) ...");
 
       var filteredWords = words
          .Where(word => word.Length > 3)
@@ -63,6 +63,8 @@ static class Program
                           let reverse = new string(word.Reverse().ToArray())
                           where word != reverse && wordsSet.Contains(reverse)
                           select word;
+
+      Console.WriteLine($"\tFound {reversedWords.Count()} reversed words");
 
       return reversedWords;
     });
